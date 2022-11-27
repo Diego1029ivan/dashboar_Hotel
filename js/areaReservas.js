@@ -13,8 +13,7 @@ var settings = {
 $.ajax(settings).done(function (response) {
 //console.log(response)
 //console.log(Element.fechaEntrada)
-let cantEne =0,cantFeb=0,cantMar=0,cantAbr=0,cantMay=0,cantJun=0,cantJul=0,cantAgo=0
-let cantSet=0,cantOct=0,cantNov=0,cantDic=0
+
 
 let pagoEnero=0,pagoFeb=0,pagoMar=0,pagoAbr=0,pagoMay=0,pagoJun=0,pagoJul=0
 let pagoAgo=0,pagoSet=0,pagoOct=0,pagoNov=0,pagoDic=0

@@ -19,7 +19,7 @@
 	curl_close($curl);
 	$data = json_decode($response); 
 
-    
+  $get_id=7; 
 
     //var_dump($data);
     //echo($roles); 
@@ -294,17 +294,18 @@
                     <tr>
                       <th>Nombres</th>
                       <th>Ruc</th>
-                      <th>Total de habitacion</th>
+                      <th>Usuario</th>
                       <th>Description</th>
                       <th>logo</th> 
-                        <th>Cuidad</th> 
-                        <th>Imagen</th>                
+                      <th>Cuidad</th> 
+                      <th>Imagen</th>                
                       <th>Modificar</th>
                     </tr>
                   </thead>
              
                 <tbody>
                     <?php foreach ($data as $hotel):  ?>
+                      <?php if($hotel->usuario->id==$get_id){?>
                     <tr>
                       <td>
                         <?= $hotel->nombre?>
@@ -313,7 +314,7 @@
                         <?= $hotel->ruc?>
                       </td>
                       <td>
-                        <?= $hotel->cantidadHabitacion?>
+                        <?= $hotel->usuario->id?>
                       </td>
                       <td>
                         <?= $hotel->descripcionHotel?>
@@ -333,7 +334,7 @@
                                                 <a href="./crud/eliminarHoteles.php?id=<?php echo $hotel->id?>" onclick="return confirm('Estás seguro que deseas eliminar el Hotel?'); "><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
-                   <?php endforeach ?>	                                                     
+                   <?php } endforeach ?>	                                                     
                   </tbody>
                 </table>
               </div>

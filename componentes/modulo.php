@@ -30,7 +30,7 @@
 </div>
 
 <!-- Nav Item - Pages Collapse Menu -->
-<li class="nav-item">
+<!-- <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-fw fa-cog"></i>
@@ -43,7 +43,7 @@
             <a class="collapse-item " href="usuarios_hotel.php">Usuarios Hoteles</a>
         </div>
     </div>
-</li>
+</li> -->
 
 <!-- Nav Item - Utilities Collapse Menu -->
 <li class="nav-item">
@@ -60,7 +60,7 @@
             <a class="collapse-item" href="piscinas.php">Servicio de Pisicina</a>
             <a class="collapse-item" href="bares.php">Servicio de Bar</a>
             <a class="collapse-item" href="cocheras.php">Servicio de cochera</a>
-            <a class="collapse-item" href="ubicaciones.php">Ubicaciones</a>
+            
         </div>
     </div>
 </li>
@@ -73,13 +73,13 @@
     
 </li>
 
-<li class="nav-item">
+<!-- <li class="nav-item">
     <a class="nav-link collapsed" href="testimonios.php" >
         <i class="fas fa-comments"></i>
         <span>Testimonios</span>
     </a>
     
-</li>
+</li> -->
 
 <!-- Divider -->
 <hr class="sidebar-divider">
@@ -107,6 +107,7 @@
             <a class="collapse-item" href="form_bar.html">Formulario Bar</a>
             <a class="collapse-item" href="form_galeria.html">Formulario galeria</a>
             <a class="collapse-item" href="form_precios.html">Formulario precio</a>
+            <a class="collapse-item" href="form_reserva.html">Formulario reserva</a>
             
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">Other Pages:</h6>
