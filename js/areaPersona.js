@@ -2,7 +2,8 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
-
+get_hote=3
+get_hote2=2
 $.ajax(settings).done(function (response) {
   //console.log(response)
   //console.log(Element.fechaEntrada)
@@ -13,9 +14,10 @@ $.ajax(settings).done(function (response) {
   let pagoAgo=0,pagoSet=0,pagoOct=0,pagoNov=0,pagoDic=0*/
    response.forEach(Element=>{
     
-  
+  if(Element.hotel.id==get_hote|| Element.hotel.id==get_hote2){
   
     switch (parseInt((Element.fechaEntrada).substr(5,2))){
+
       case 1 :
       cantEne++;
       //pagoEnero+=Element.adelantoReservas
@@ -65,7 +67,7 @@ $.ajax(settings).done(function (response) {
       //pagoDic+=Element.adelantoReservas
       break;
     }
-  
+  }
    })
 
 let arregloCant = [cantEne, cantFeb, cantMar, cantAbr, cantMay, cantJun,cantJul,cantAgo,cantSet,cantOct,cantNov,cantDic]

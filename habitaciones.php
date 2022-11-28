@@ -1,5 +1,4 @@
-<?php include './componentes/llamar_reserva.php'; ?>
-<?php include './componentes/llamar_testimonio.php'; $get_hotel=3?>
+<?php include './componentes/llamar_testimonio.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,9 +37,9 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon">
-          <img src="./img/mapah.png" alt="">
+        <img src="./img/gps.png" alt="">
         </div>
-        <div class="sidebar-brand-text mx-3">Reservas</div>
+        <div class="sidebar-brand-text mx-3">Testimonios</div>
       </a>
 
       <!-- Divider -->
@@ -96,7 +95,7 @@
         </div>
       </li>
 
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link collapsed" href="reservas.php" >
             <i class="fas fa-calendar-day"></i>
             <span>Reservas</span>
@@ -104,7 +103,7 @@
     
     </li>
 
-    <li class="nav-item ">
+    <li class="nav-item active">
       <a class="nav-link collapsed show" href="testimonios.php" >
           <i class="fas fa-comments"></i>
           <span>Testimonios</span>
@@ -141,8 +140,8 @@
         </div>
       </li>
 
-      <!-- Nav Item - Charts -->
-     
+    
+
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
@@ -257,50 +256,35 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Tabla de Reservas</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Tabla de Testimonio</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Id Reserva</th>
-                      <th>Adelanto</th>
-                      <th>Fecha entrada</th>
-                      <th>Fecha de salida</th>
-                      <th>Selección de Hotel</th>
-                      <th>Usuario</th>
-                      <th>Estado</th>
-                      <th>Acciones</th>
+                      <th>Id Testimonio</th>
+                      <th>Descripción del testimonio</th>
+                      <th>Nombre del usuario</th>
+                      <th>estado</th>
+                      <th>acciones</th>
                       
                     </tr>
                   </thead>
              
                 <tbody>
-                <?php foreach ($data_reserv as $reserva):  ?>
-                  <?php if($reserva->hotel->id==$get_hotel){?>
+                <?php foreach ($data_test as $testimonio):  ?>
                     <tr>
-                      <td><?= $reserva->id?></td>
-                      <td><?= $reserva->adelantoReservas?></td>
-                      <td><?= date_format(date_create_from_format('Y-m-d',$reserva->fechaEntrada),'d-m-Y')?></td>
-                      <td><?= date_format(date_create_from_format('Y-m-d',$reserva->fechaSalida),'d-m-Y')?></td>
-                      <td><?= $reserva->hotel->nombre?></td>
-                      <td><?= $reserva->usuario->nombre?></td>
-                      <td><?php if ($reserva->estado == 1){ ?>
-                        <button class="btn btn-success" >Activo</button>                     
-                      <?php }else if($reserva->estado == 2){?>
-                        <button class="btn btn-warning">Espera</button>
-                        
-                       <?php }?> 
-                        
-                        
-                      </td>
+                      <td><?= $testimonio->id?></td>
+                      <td><?= $testimonio->detalle_testimonio?></td>
+                      <td><?= $testimonio->usuario->nombre?></td>
+                      <td><?= $testimonio->estado?></td>
                       <td class="botones-tabla">
-                      <a href="./crud/crudReserva/editar_reserva.php?id=<?php echo $reserva->id?>"><i class="fas fa-pencil-alt"></i></a>
-                      <a href="./crud/crudReserva/eliminar_reserva.php?id=<?php echo $reserva->id?>" onclick="return confirm('Estás seguro que deseas eliminar el Hotel?'); "><i class="fas fa-trash-alt"></i></a>
-                      </td>
+                                                <a href="#"><i class="fas fa-pencil-alt"></i></a>
+                                                <a href="./crud/eliminarHoteles.php?id=<?php echo $hotel->id?>" onclick="return confirm('Estás seguro que deseas eliminar el Hotel?'); "><i class="fas fa-trash-alt"></i></a>
+                        </td>
                     </tr>
-                <?php }endforeach ?>	                                                      
+                <?php endforeach ?>	                                                      
                   </tbody>
                 </table>
               </div>

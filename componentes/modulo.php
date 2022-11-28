@@ -73,13 +73,13 @@
     
 </li>
 
-<!-- <li class="nav-item">
-    <a class="nav-link collapsed" href="testimonios.php" >
+<li class="nav-item">
+    <a class="nav-link collapsed" href="habitaciones.php" >
         <i class="fas fa-comments"></i>
-        <span>Testimonios</span>
+        <span>Habitaciones</span>
     </a>
     
-</li> -->
+</li>
 
 <!-- Divider -->
 <hr class="sidebar-divider">

@@ -2,7 +2,8 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
-
+let get_hote=3
+let get_hote2=2
 var settings = {
   "url": "http://localhost:75/api/reserva",
   "method": "GET",
@@ -11,7 +12,7 @@ var settings = {
 };
 
 $.ajax(settings).done(function (response) {
-//console.log(response)
+console.log(response)
 //console.log(Element.fechaEntrada)
 
 
@@ -37,6 +38,7 @@ result_unicoOrdenado=result_unico.sort()
 /* CREAR ARREGLOS POR AÑO */
 let arregloR=[]
 for (let j = 0; j < result_unicoOrdenado.length; j++) {
+  
  // const element = array[j];
   eval("var pagoEnero"+j+"=0")
   eval("var pagoFeb"+j+"=0")
@@ -55,7 +57,7 @@ for (let j = 0; j < result_unicoOrdenado.length; j++) {
 
         //arregloYear.push(parseInt((Element.fechaEntrada).substr(0,4)))
       if (parseInt((Element.fechaEntrada).substr(0,4))==result_unicoOrdenado[j]) {
-        
+        if(Element.hotel.id==get_hote || Element.hotel.id==get_hote2 ){
 
             switch (parseInt((Element.fechaEntrada).substr(5,2))){
               case 1 :
@@ -107,6 +109,7 @@ for (let j = 0; j < result_unicoOrdenado.length; j++) {
               eval("pagoDic"+j+"+=Element.adelantoReservas")
               break;
             }
+          }
       }
     })
     eval("arregloR"+j+"=[pagoEnero"+j+", pagoFeb"+j+", pagoMar"+j+", pagoAbr"+j+", pagoMay"+j+", pagoJun"+j+", pagoJul"+j+", pagoAgo"+j+", pagoSet"+j+", pagoOct"+j+", pagoNov"+j+", pagoDic"+j+"]")
