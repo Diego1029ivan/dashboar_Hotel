@@ -75,7 +75,7 @@
 
 <li class="nav-item">
     <a class="nav-link collapsed" href="habitaciones.php" >
-        <i class="fas fa-comments"></i>
+    <i class="fas fa-bed"></i>
         <span>Habitaciones</span>
     </a>
     

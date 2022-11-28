@@ -1,4 +1,5 @@
 <?php include './componentes/llamar_testimonio.php'; ?>
+<?php include './crud/crudTipo/llamar_tipo.php'; //var_dump($data_tipo->precioxtipohabitacion) ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +40,7 @@
         <div class="sidebar-brand-icon">
         <img src="./img/gps.png" alt="">
         </div>
-        <div class="sidebar-brand-text mx-3">Testimonios</div>
+        <div class="sidebar-brand-text mx-3">Habitaciones</div>
       </a>
 
       <!-- Divider -->
@@ -60,21 +61,7 @@
         Interface
       </div>
 
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item ">
-        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-          aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Usuarios</span>
-        </a>
-        <div id="collapseTwo" class="collapse " aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Interfaz:</h6>
-            <a class="collapse-item " href="usuarios_est.php">Usuarios estándares</a>
-            <a class="collapse-item" href="usuarios_hotel.php">Usuarios Hoteles</a>
-          </div>
-        </div>
-      </li>
+      
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item ">
@@ -103,13 +90,13 @@
     
     </li>
 
-    <li class="nav-item active">
-      <a class="nav-link collapsed show" href="testimonios.php" >
-          <i class="fas fa-comments"></i>
-          <span>Testimonios</span>
-      </a>
+    <li class="nav-item active" >
+    <a class="nav-link collapsed show" href="habitaciones.php" >
+    <i class="fas fa-bed"></i>
+        <span>Habitaciones</span>
+    </a>
     
-    </li>
+</li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -215,7 +202,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Administrador General</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Administrador Hotel</span>
                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
               </a>
               <!-- Dropdown - User Information -->
@@ -249,48 +236,256 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Tablas de todos los Hoteles</h1>
+          <h1 class="h3 mb-2 text-gray-800">Estado de habitaciones</h1>
           <p class="mb-4">Se presenta la lista de los hoteles para verificar el estado de los hoteles y poder modifcar algún
             valor.</p>
 
-          <!-- DataTales Example -->
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Tabla de Testimonio</h6>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>Id Testimonio</th>
-                      <th>Descripción del testimonio</th>
-                      <th>Nombre del usuario</th>
-                      <th>estado</th>
-                      <th>acciones</th>
+          <!-- Templates de estados -->
+          <h2>Habitaciones simples</h2>
+          <div class="row">
+                    
+                        <!-- HABITACIONES LIBRES -->
+                        <?php foreach ($data_tipo->precioxtipohabitacion as $tipo): 
+                          if($tipo->tipoHabitacion=="Simple"){
+                            foreach ($tipo->distribuido->lista_relacionada as $tipo_espec):
+                            
+                              if ($tipo_espec->estado=="libre") {
+                              
+                           
+                            for ($i=0; $i<($tipo_espec->cantidad); $i++){  ?>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body card-libre">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Libre</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">S/<?php echo($tipo_espec->precio)  ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-bed fa-2x "></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php  }
+                              }else if ($tipo_espec->estado=="ocupado") { ?> 
+                              
+                              
+                              <!-- HABITACIONES OCUPADAS -->
+                            <?php  for ($i=0; $i<($tipo_espec->cantidad); $i++){  ?>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body card-ocupado">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                ocupado</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">S/<?php echo($tipo_espec->precio)  ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-bed fa-2x "></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                              
+                              
+                        <?php }}else if ($tipo_espec->estado=="reservado") { ?>
+                              
+                              
+                              <!-- HABITACIONES RESERVADAS -->
+                        <?php  for ($i=0; $i<($tipo_espec->cantidad); $i++){  ?>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body card-reservado">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Reservado</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">S/<?php echo($tipo_espec->precio)  ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-bed fa-2x "></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                              
                       
-                    </tr>
-                  </thead>
-             
-                <tbody>
-                <?php foreach ($data_test as $testimonio):  ?>
-                    <tr>
-                      <td><?= $testimonio->id?></td>
-                      <td><?= $testimonio->detalle_testimonio?></td>
-                      <td><?= $testimonio->usuario->nombre?></td>
-                      <td><?= $testimonio->estado?></td>
-                      <td class="botones-tabla">
-                                                <a href="#"><i class="fas fa-pencil-alt"></i></a>
-                                                <a href="./crud/eliminarHoteles.php?id=<?php echo $hotel->id?>" onclick="return confirm('Estás seguro que deseas eliminar el Hotel?'); "><i class="fas fa-trash-alt"></i></a>
-                        </td>
-                    </tr>
-                <?php endforeach ?>	                                                      
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+                              <?php }}endforeach ;
+                              }
+                            endforeach ?>
+                        
+                  </div>
 
+                        
+        <h2>Habitaciones dobles</h2>
+        <div class="row">
+                    
+                    <!-- HABITACIONES LIBRES -->
+                    <?php foreach ($data_tipo->precioxtipohabitacion as $tipo): 
+                      if($tipo->tipoHabitacion=="doble"){
+                        foreach ($tipo->distribuido->lista_relacionada as $tipo_espec):
+                        
+                          if ($tipo_espec->estado=="libre") {
+                          
+                       
+                        for ($i=0; $i<($tipo_espec->cantidad); $i++){  ?>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body card-libre">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Libre</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">S/<?php echo($tipo_espec->precio)  ?></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-bed fa-2x "></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php  }
+                          }else if ($tipo_espec->estado=="ocupado") { ?> 
+                          
+                          
+                          <!-- HABITACIONES OCUPADAS -->
+                        <?php  for ($i=0; $i<($tipo_espec->cantidad); $i++){  ?>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body card-ocupado">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            ocupado</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">S/<?php echo($tipo_espec->precio)  ?></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-bed fa-2x "></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                          
+                          
+                    <?php }}else if ($tipo_espec->estado=="reservado") { ?>
+                          
+                          
+                          <!-- HABITACIONES RESERVADAS -->
+                    <?php  for ($i=0; $i<($tipo_espec->cantidad); $i++){  ?>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body card-reservado">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                            Reservado</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">S/<?php echo($tipo_espec->precio)  ?></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-bed fa-2x "></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                          
+                  
+                          <?php }}endforeach ;
+                          }
+                        endforeach ?>
+                    
+              </div>
+                    <h2>Habitaciones matrimoniales</h2>
+                    <div class="row">
+                    
+                    <!-- HABITACIONES LIBRES -->
+                    <?php foreach ($data_tipo->precioxtipohabitacion as $tipo): 
+                      if($tipo->tipoHabitacion=="matrimonial"){
+                        foreach ($tipo->distribuido->lista_relacionada as $tipo_espec):
+                        
+                          if ($tipo_espec->estado=="libre") {
+                          
+                       
+                        for ($i=0; $i<($tipo_espec->cantidad); $i++){  ?>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body card-libre">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Libre</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">S/<?php echo($tipo_espec->precio)  ?></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-bed fa-2x "></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php  }
+                          }else if ($tipo_espec->estado=="ocupado") { ?> 
+                          
+                          
+                          <!-- HABITACIONES OCUPADAS -->
+                        <?php  for ($i=0; $i<($tipo_espec->cantidad); $i++){  ?>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body card-ocupado">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            ocupado</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">S/<?php echo($tipo_espec->precio)  ?></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-bed fa-2x "></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                          
+                          
+                    <?php }}else if ($tipo_espec->estado=="reservado") { ?>
+                          
+                          
+                          <!-- HABITACIONES RESERVADAS -->
+                    <?php  for ($i=0; $i<($tipo_espec->cantidad); $i++){  ?>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body card-reservado">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                            Reservado</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">S/<?php echo($tipo_espec->precio)  ?></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-bed fa-2x "></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                          
+                  
+                          <?php }}endforeach ;
+                          }
+                        endforeach ?>
+                    
+              </div>
         </div>
         <!-- /.container-fluid -->
 

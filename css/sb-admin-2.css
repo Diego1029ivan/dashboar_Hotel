@@ -4528,6 +4528,18 @@ input[type="button"].btn-block {
   padding: 1.25rem;
 }
 
+.card-libre{
+  background-color: #4e72df36;
+}
+
+.card-ocupado{
+  background-color: #1cc88a36;
+}
+
+.card-reservado{
+  background-color: #f6c23e36;
+}
+
 .card-title {
   margin-bottom: 0.75rem;
 }
